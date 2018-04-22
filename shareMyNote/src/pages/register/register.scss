@@ -1,0 +1,32 @@
+::-webkit-scrollbar,
+*::-webkit-scrollbar {
+    display: none;
+}
+
+page-register {
+    #page_content {
+        background: color( $colors, base);
+        h1 {
+            font-size: 52px;
+            margin-top: 5px;
+            color: white;
+        }
+        .text_area {
+            margin-top: -27%;
+        }
+        .buttons {
+            background: color($colors, light);
+            color: black;
+            display: inline-block;
+        }
+        .button_position {
+            text-align: center;
+        }
+        .inputs {
+            border-radius: 20px;
+        }
+        img {
+            margin-top: -33%;
+        }
+    }
+}

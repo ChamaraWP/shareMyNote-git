@@ -1,0 +1,32 @@
+<div id="custom-overlay" [style.display]="splash ? 'flex': 'none'">
+    <div class="flb">
+        <div class="Aligner-item Aligner-item--top"></div>
+        <img src="assets/imgs/logo1.svg">
+        <div class="Aligner-item Aligner-item--bottom"></div>
+    </div>
+</div>
+
+
+<ion-content padding id="page_content">
+    <div class="page_text">
+        <h1>Login</h1>
+        <img src="assets/icon/notebook.svg">
+        <div class="text_area">
+            <ion-item class="inputs">
+
+                <ion-input placeholder="Username"></ion-input><br>
+            </ion-item>
+            <br>
+            <ion-item class="inputs">
+
+                <ion-input placeholder="Password"></ion-input><br>
+            </ion-item>
+            <br>
+            <div class="button_position">
+                <button ion-button round class="buttons" (click)="redirectToHome();">SignIn</button>
+                <h6>If you are not registered user<a (click)="redirectToSignUp();"> click here</a></h6>
+            </div>
+
+        </div>
+    </div>
+</ion-content>
