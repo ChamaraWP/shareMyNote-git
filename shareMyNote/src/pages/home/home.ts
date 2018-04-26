@@ -2,6 +2,8 @@ import { Component } from '@angular/core';
 import { NavController, ViewController } from 'ionic-angular';
 import { PostsProvider } from './../../providers/posts/posts';
 import { PostPage } from './../post/post';
+import { UploadPage } from './../upload/upload';
+
 
 
 
@@ -30,6 +32,10 @@ export class HomePage {
 
   directToPost(){
     this.navCtrl.push(PostPage);
+  }
+
+  directToUpload(){
+    this.navCtrl.push(UploadPage);
   }
 
 }
