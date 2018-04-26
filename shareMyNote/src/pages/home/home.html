@@ -9,9 +9,20 @@
 
 <ion-content padding>
     <h4>Latest Update</h4>
-    <ion-card>
-        <ion-row>
-
-        </ion-row>
-    </ion-card>
+    <ion-list>
+        <ion-item *ngFor="let post of allPost">
+            <ion-avatar item-start>
+                <img [src]=post.image>
+            </ion-avatar>
+            <h2>{{post.name}}</h2>
+            <h3>{{post.description}}</h3>
+            <p>I've had a pretty messed up day. If we just...butt</p>
+            <button ion-button small item-right color="niceblue" (click)="directToPost()">More</button>
+        </ion-item>
+    </ion-list>
+    <ion-fab right bottom>
+        <button ion-fab color="niceorange">
+            <ion-icon name="add-circle"></ion-icon>
+        </button>
+    </ion-fab>
 </ion-content>
