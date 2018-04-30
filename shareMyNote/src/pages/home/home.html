@@ -14,15 +14,17 @@
             <ion-avatar item-start>
                 <img [src]=post.image>
             </ion-avatar>
-            <h2>{{post.name}}</h2>
+            <h2><b>{{post.name}}</b></h2>
             <h3>{{post.description}}</h3>
             <p>I've had a pretty messed up day. If we just...butt</p>
-            <button ion-button small item-right color="niceblue" (click)="directToPost()">More</button>
+            <!--<button ion-button small item-right color="niceblue" (click)="directToPost()"></button>-->
+            <ion-icon item-right color="niceblue" name="arrow-forward" (click)="directToPost()"></ion-icon>
+
         </ion-item>
     </ion-list>
     <ion-fab right bottom>
         <button ion-fab color="niceorange" (click)="directToUpload()">
-            <ion-icon name="add-circle"></ion-icon>
+            <ion-icon name="add"></ion-icon>
         </button>
     </ion-fab>
 </ion-content>

@@ -6,13 +6,33 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>post</ion-title>
-  </ion-navbar>
+    <ion-navbar>
+        <ion-title>Post</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
-
+    <h3>Post Name</h3>
+    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae officiis autem eius laudantium debitis culpa doloribus fugit beatae neque praesentium reiciendis, quod blanditiis sint commodi illo laboriosam dolores voluptatem nisi?
+    </p>
+    <h6>Media</h6>
+    <p>Images goes here</p>
+    <hr>
+    <h6>Comments</h6>
+    <ion-list>
+        <ion-item>
+            <ion-avatar item-start>
+                <img src="assets/imgs/user.svg">
+            </ion-avatar>
+            <h2>Finn</h2>
+            <p>I've had a pretty messed up day. If we just...</p>
+        </ion-item>
+    </ion-list>
+    <ion-fab right bottom>
+        <button ion-fab color="niceorange" (click)="openCommentModal()">
+            <ion-icon name="add-circle"></ion-icon>
+        </button>
+    </ion-fab>
 </ion-content>

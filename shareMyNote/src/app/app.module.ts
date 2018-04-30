@@ -1,3 +1,4 @@
+
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
@@ -13,6 +14,7 @@ import { RegisterPage } from './../pages/register/register';
 import { PostPage } from './../pages/post/post';
 import { DiscussionPage } from './../pages/discussion/discussion';
 import { UploadPage } from './../pages/upload/upload';
+import { CommentsPage } from './../pages/comments/comments';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -28,6 +30,7 @@ import { PostsProvider } from '../providers/posts/posts';
     PostPage,
     DiscussionPage,
     UploadPage,
+    CommentsPage
 
   ],
   imports: [
@@ -45,7 +48,8 @@ import { PostsProvider } from '../providers/posts/posts';
     RegisterPage,
     PostPage,
     DiscussionPage,
-    UploadPage
+    UploadPage,
+    CommentsPage
 
   ],
   providers: [
