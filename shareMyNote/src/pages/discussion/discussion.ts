@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+import { PostsProvider } from './../../providers/posts/posts';
 
 /**
  * Generated class for the DiscussionPage page.
@@ -14,12 +15,16 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'discussion.html',
 })
 export class DiscussionPage {
-
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  public allDiscussion = []
+  constructor(public navCtrl: NavController, public navParams: NavParams, private postProvider:PostsProvider  ) {
   }
 
   ionViewDidLoad() {
-    console.log('ionViewDidLoad DiscussionPage');
+    this.postProvider.getPosts()
+      .subscribe(discussionList => this.allDiscussion = discussionList);
   }
+
+
+
 
 }

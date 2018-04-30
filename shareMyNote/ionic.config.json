@@ -1,6 +1,6 @@
 {
   "name": "shareMyNote",
-  "app_id": "",
+  "app_id": "6fdf678d",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
