@@ -1,7 +1,9 @@
+import { AuthProvider } from './../../providers/auth/auth';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { RegisterPage } from './../register/register';
 import { HomePage } from './../home/home';
+import { User } from "../../models/user"
 
 
 @IonicPage()
@@ -12,8 +14,9 @@ import { HomePage } from './../home/home';
 export class LoginPage {
 
   splash = true;
+  user = {} as User;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams,) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private authprovider:AuthProvider) {
   }
 
 
@@ -21,7 +24,9 @@ export class LoginPage {
     this.navCtrl.push(RegisterPage);
   }
 
-  redirectToHome(){
+  redirectToHome(user){
+
+    this.authprovider.loginUser(user);
     // to use default animation and add Homepage as Root
     this.navCtrl.insert(0, HomePage).then(() => {
       this.navCtrl.popToRoot();

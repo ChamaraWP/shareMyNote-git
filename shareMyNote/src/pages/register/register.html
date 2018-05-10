@@ -4,23 +4,23 @@
         <img src="assets/icon/user.svg">
         <div class="text_area">
             <ion-item class="inputs">
-                <ion-input placeholder="Username"></ion-input><br>
+                <ion-input placeholder="Username" [(ngModel)]="user.name"></ion-input><br>
             </ion-item>
             <br>
             <ion-item class="inputs">
-                <ion-input placeholder="Email"></ion-input><br>
+                <ion-input placeholder="Email" [(ngModel)]="user.email"></ion-input><br>
             </ion-item>
             <br>
             <ion-item class="inputs">
-                <ion-input placeholder="Password"></ion-input><br>
+                <ion-input placeholder="Password" [(ngModel)]="user.password"></ion-input><br>
             </ion-item>
             <br>
             <ion-item class="inputs">
-                <ion-input placeholder="Re-Password"></ion-input><br>
+                <ion-input placeholder="Re-Password" [(ngModel)]="user.repassword"></ion-input><br>
             </ion-item>
             <br>
             <div class="button_position">
-                <button ion-button round class="buttons">SingUp</button>
+                <button ion-button round class="buttons" (click)="singup(user)">SingUp</button>
             </div>
         </div>
     </div>

@@ -17,4 +17,18 @@
     width: 100% !important;
     height: 30% !important;
     opacity: 0.75 !important;
+    background: #11998e;
+    /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #38ef7d, #11998e);
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #38ef7d, #11998e);
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+}
+
+.user_cont {
+    font-size: 15px !important;
+    color: black !important;
+    text-align: center;
+    margin-top: 45% !important;
+    font-style: bold;
 }

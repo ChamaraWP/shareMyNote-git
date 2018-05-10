@@ -13,15 +13,15 @@
         <img src="assets/imgs/logo1.svg">
         <div class="text_area">
             <ion-item class="inputs">
-                <ion-input placeholder="Username"></ion-input><br>
+                <ion-input placeholder="Username" [(ngModel)]="user.email"></ion-input><br>
             </ion-item>
             <br>
             <ion-item class="inputs">
-                <ion-input placeholder="Password"></ion-input><br>
+                <ion-input placeholder="Password" [(ngModel)]="user.password"></ion-input><br>
             </ion-item>
             <br>
             <div class="button_position">
-                <button ion-button round class="buttons" (click)="redirectToHome();">SignIn</button>
+                <button ion-button round class="buttons" (click)="redirectToHome(user);">SignIn</button>
                 <h6>If you are not registered user<a (click)="redirectToSignUp();"> click here</a></h6>
             </div>
 
