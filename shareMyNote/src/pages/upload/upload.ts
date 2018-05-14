@@ -1,5 +1,10 @@
+import { PostsProvider } from './../../providers/posts/posts';
+import { post } from './../../models/post';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
+
+
+
 
 /**
  * Generated class for the UploadPage page.
@@ -15,13 +20,19 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class UploadPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  userPost = {} as post;
+  constructor(public navCtrl: NavController, public navParams: NavParams,private postProvider:PostsProvider) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UploadPage');
   }
 
+  uploadPost(userPost){
+    console.log(userPost);
+
+    this.postProvider.setPost(userPost);
+  }
 
 
 }

@@ -1,3 +1,5 @@
+
+import { AngularFireAuth } from 'angularfire2/auth';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
@@ -8,6 +10,8 @@ import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { DiscussionPage } from './../pages/discussion/discussion';
 import { UploadPage } from './../pages/upload/upload';
+import { MenuController } from 'ionic-angular';
+
 
 
 @Component({
@@ -21,7 +25,7 @@ export class MyApp {
 
   pages: Array<{title: string, component: any}>;
 
-  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen) {
+  constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private afAuth:AngularFireAuth,public menuCtrl:MenuController) {
     this.initializeApp();
 
     // used for an example of ngFor and navigation
@@ -48,5 +52,14 @@ export class MyApp {
     // Reset the content nav to have just this page
     // we wouldn't want the back button to show in this scenario
     this.nav.setRoot(page.component);
+  }
+
+  singoutUser(){
+    this.afAuth.auth.signOut().then(() => {
+      this.menuCtrl.close();
+      this.nav.push(LoginPage);
+    }).catch( (err) => {
+      console.log("This is Signout Error " +err);
+    })
   }
 }

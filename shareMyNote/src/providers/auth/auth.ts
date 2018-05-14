@@ -1,3 +1,4 @@
+import { AngularFireDatabase} from 'angularfire2/database';
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -13,28 +14,29 @@ import { User } from './../../models/user';
 @Injectable()
 export class AuthProvider {
 
-  constructor(public http: HttpClient, private afAuth:AngularFireAuth) {
+  userid:string = null;
+
+  constructor(public http: HttpClient, private afAuth:AngularFireAuth, private firebase:AngularFireDatabase) {
     console.log('Hello AuthProvider Provider');
   }
 
   async registerUser(user:User){
-    try{
-        const result = await this.afAuth.auth.createUserWithEmailAndPassword(user.email,user.password);
-        console.log(result);
-
-    }catch(error){
-       console.log('Somethig Went Worng '+ error);
-    }
+        const result = await this.afAuth.auth.createUserWithEmailAndPassword(user.email,user.password).then(
+          newUser => {
+                this.firebase
+                  .database
+                    .ref('/userProfile')
+                      .child(newUser.uid)
+                        .set({email:user.email,username:user.name})
+    });
+    console.log(result);
   }
 
   async loginUser(user:User){
-    try {
       const result = await this.afAuth.auth.signInWithEmailAndPassword(user.email,user.password);
-      console.log(result);
-
-    } catch (error) {
-      console.log('Somethig Went Worng '+ error);
+        console.log(result);
+          this.userid = result.uid
+            console.log(this.userid);
     }
-  }
 
 }

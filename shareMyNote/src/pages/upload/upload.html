@@ -20,21 +20,25 @@
     <ion-list>
         <ion-item>
             <ion-label floating>Subject Name</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" [(ngModel)]=userPost.subject></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating>Lesson Number</ion-label>
-            <ion-input type="text"></ion-input>
+            <ion-input type="text" [(ngModel)]=userPost.lessonNumber></ion-input>
         </ion-item>
         <ion-item>
             <ion-label floating>Enter a Description</ion-label>
-            <ion-textarea rows="4"></ion-textarea>
+            <ion-textarea rows="4" [(ngModel)]=userPost.description></ion-textarea>
         </ion-item>
 
-        <ion-item>
-            <button ion-button full color="niceblue">Add Photos</button>
+        <ion-item style="text-align: center !important">
+            <button ion-button small color="niceorange">Add Photos</button>
         </ion-item>
-
+        <br>
+        <button ion-button full color="niceblue" (click)="uploadPost(userPost);">Post</button>
     </ion-list>
+
+
+
 
 </ion-content>

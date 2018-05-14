@@ -1,3 +1,4 @@
+import { UsercontentProvider } from './../providers/usercontent/usercontent';
 import { BrowserModule } from '@angular/platform-browser';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
@@ -16,12 +17,13 @@ import { RegisterPage } from './../pages/register/register';
 import { PostPage } from './../pages/post/post';
 import { DiscussionPage } from './../pages/discussion/discussion';
 import { UploadPage } from './../pages/upload/upload';
-import { CommentsPage } from './../pages/comments/comments';
+
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { PostsProvider } from '../providers/posts/posts';
 import { AuthProvider } from './../providers/auth/auth';
+
 
 
 @NgModule({
@@ -34,7 +36,7 @@ import { AuthProvider } from './../providers/auth/auth';
     PostPage,
     DiscussionPage,
     UploadPage,
-    CommentsPage
+
 
   ],
   imports: [
@@ -44,7 +46,8 @@ import { AuthProvider } from './../providers/auth/auth';
     IonicModule.forRoot(MyApp),
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
-    AngularFireDatabaseModule
+    AngularFireDatabaseModule,
+
   ],
   bootstrap: [IonicApp],
   entryComponents: [
@@ -56,7 +59,7 @@ import { AuthProvider } from './../providers/auth/auth';
     PostPage,
     DiscussionPage,
     UploadPage,
-    CommentsPage
+
 
   ],
   providers: [
@@ -64,7 +67,8 @@ import { AuthProvider } from './../providers/auth/auth';
     SplashScreen,
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PostsProvider,
-    AuthProvider
+    AuthProvider,
+    UsercontentProvider
   ]
 })
 export class AppModule {}

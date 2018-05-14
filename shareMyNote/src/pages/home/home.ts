@@ -1,8 +1,11 @@
+import { UsercontentProvider } from './../../providers/usercontent/usercontent';
 import { Component } from '@angular/core';
 import { NavController, ViewController,LoadingController } from 'ionic-angular';
 import { PostsProvider } from './../../providers/posts/posts';
 import { PostPage } from './../post/post';
 import { UploadPage } from './../upload/upload';
+
+
 
 
 
@@ -13,13 +16,18 @@ import { UploadPage } from './../upload/upload';
 })
 export class HomePage {
   public allPost = []
-
-
+  alive:boolean= false;
   menuIsHidden: boolean = false; // keep state of the togle button
 
-  constructor(public navCtrl: NavController , private viewController:ViewController, private postProvider:PostsProvider, private loadinController:LoadingController) {
+  constructor(public navCtrl: NavController ,
+    private viewController:ViewController,
+    private postProvider:PostsProvider,
+    private loadinController:LoadingController,
+    private userCont:UsercontentProvider,
 
-  }
+     ) {
+
+    }
 
 
 
@@ -33,12 +41,11 @@ export class HomePage {
       content:"Getting Ready"
     });
     loader.present()
-
-    this.postProvider.getPosts()
-      .subscribe((postsList) => {
-         loader.dismiss();
-         this.allPost = postsList});
-  }
+       this.postProvider.getPosts()
+         .subscribe((postsList) => {
+            loader.dismiss();
+             this.allPost = postsList});
+    }
 
   directToPost(){
     this.navCtrl.push(PostPage);
@@ -47,5 +54,8 @@ export class HomePage {
   directToUpload(){
     this.navCtrl.push(UploadPage);
   }
+
+
+
 
 }

@@ -25,12 +25,11 @@ export class LoginPage {
   }
 
   redirectToHome(user){
-
-    this.authprovider.loginUser(user);
-    // to use default animation and add Homepage as Root
-    this.navCtrl.insert(0, HomePage).then(() => {
-      this.navCtrl.popToRoot();
-    });
+    this.authprovider.loginUser(user).then(
+       () => this.navCtrl.insert(0, HomePage).then(() => { // to use default animation and add Homepage as Root
+         this.navCtrl.popToRoot()}),
+          (err) => console.log('Wrong Email and Password cant proceed')
+      );
   }
 
   ionViewDidLoad() {
