@@ -33,6 +33,14 @@ page-login {
         a {
             color: white;
         }
+        .input-cover {
+            position: static;
+        }
+        .error {
+            text-align: center;
+            color: rgba(255, 255, 255, 0.796);
+            font-weight: bold;
+        }
     }
 }
 

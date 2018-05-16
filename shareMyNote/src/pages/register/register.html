@@ -1,27 +1,31 @@
 <ion-content padding id="page_content">
     <div class="page_text">
         <h1>Register</h1>
-        <img src="assets/icon/user.svg">
+        <img src="assets/icon/reg4.svg">
         <div class="text_area">
-            <ion-item class="inputs">
-                <ion-input placeholder="Username" [(ngModel)]="user.name"></ion-input><br>
-            </ion-item>
-            <br>
-            <ion-item class="inputs">
-                <ion-input placeholder="Email" [(ngModel)]="user.email"></ion-input><br>
-            </ion-item>
-            <br>
-            <ion-item class="inputs">
-                <ion-input placeholder="Password" [(ngModel)]="user.password"></ion-input><br>
-            </ion-item>
-            <br>
-            <ion-item class="inputs">
-                <ion-input placeholder="Re-Password" [(ngModel)]="user.repassword"></ion-input><br>
-            </ion-item>
-            <br>
-            <div class="button_position">
-                <button ion-button round class="buttons" (click)="singup(user)">SingUp</button>
-            </div>
+            <form [formGroup]="registerForm" (ngSubmit)="singup(registerForm.value)">
+                <ion-item class="inputs">
+                    <ion-input placeholder="Username" formControlName="username"></ion-input><br>
+                </ion-item>
+                <br>
+                <ion-item class="inputs">
+                    <ion-input placeholder="Email" formControlName="email"></ion-input><br>
+                </ion-item>
+                <br>
+                <ion-item class="inputs">
+                    <ion-input placeholder="Password" formControlName="password"></ion-input><br>
+                </ion-item>
+                <br>
+                <ion-item class="inputs">
+                    <ion-input placeholder="Re-Password" formControlName="repassword"></ion-input><br>
+                </ion-item>
+                <br>
+                <div class="button_position">
+                    <button ion-button round class="buttons">SingUp</button>
+                    <h6>Back to login<a (click)="redirectToSignin();"> click here</a></h6>
+                </div>
+            </form>
         </div>
     </div>
+
 </ion-content>

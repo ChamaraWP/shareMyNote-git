@@ -12,19 +12,23 @@
         <h1>Login</h1>
         <img src="assets/imgs/logo1.svg">
         <div class="text_area">
-            <ion-item class="inputs">
-                <ion-input placeholder="Username" [(ngModel)]="user.email"></ion-input><br>
-            </ion-item>
-            <br>
-            <ion-item class="inputs">
-                <ion-input placeholder="Password" [(ngModel)]="user.password"></ion-input><br>
-            </ion-item>
-            <br>
-            <div class="button_position">
-                <button ion-button round class="buttons" (click)="redirectToHome(user);">SignIn</button>
-                <h6>If you are not registered user<a (click)="redirectToSignUp();"> click here</a></h6>
-            </div>
+            <form [formGroup]="loginForm" (ngSubmit)="redirectToHome(loginForm.value);">
+                <ion-item class="inputs">
+                    <ion-input placeholder="Username" formControlName="email"></ion-input><br>
+                </ion-item>
+                <p class="error" *ngIf="!loginForm.controls['email'].valid && loginForm.controls['email'].touched">Email is Required</p>
 
+                <br>
+                <ion-item class="inputs">
+                    <ion-input type="password" placeholder="Password" formControlName="password"></ion-input><br>
+                </ion-item>
+                <p class="error" *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">Password is Required</p>
+                <br>
+                <div class="button_position">
+                    <button ion-button round class="buttons" [disabled]="!loginForm.valid" type="submit">SignIn</button>
+                    <h6>If you are not registered user<a (click)="redirectToSignUp();"> click here</a></h6>
+                </div>
+            </form>
         </div>
     </div>
 

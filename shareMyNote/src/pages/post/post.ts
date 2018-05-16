@@ -37,12 +37,10 @@ export class PostPage {
       cssClass:'alertcss',
       inputs:[{
         name:'comment',
-
       }],
       buttons:[
       {  text:'Close',
          role:'cansle'
-
       },
       {
         text:'Post',

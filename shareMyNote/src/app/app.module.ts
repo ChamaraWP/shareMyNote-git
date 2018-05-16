@@ -8,6 +8,10 @@ import { AngularFireModule } from 'angularfire2'
 import { AngularFireAuthModule } from 'angularfire2/auth'
 import { AngularFireDatabaseModule } from 'angularfire2/database'
 import { FIREBASE_CONFIG } from './app.firebase.config'
+import { Camera } from '@ionic-native/camera'
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -26,6 +30,7 @@ import { AuthProvider } from './../providers/auth/auth';
 
 
 
+
 @NgModule({
   declarations: [
     MyApp,
@@ -40,6 +45,9 @@ import { AuthProvider } from './../providers/auth/auth';
 
   ],
   imports: [
+
+    FormsModule,
+    ReactiveFormsModule,
     HttpClientModule,
     HttpModule,
     BrowserModule,
@@ -47,6 +55,7 @@ import { AuthProvider } from './../providers/auth/auth';
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
+    CommonModule
 
   ],
   bootstrap: [IonicApp],
@@ -61,6 +70,7 @@ import { AuthProvider } from './../providers/auth/auth';
     UploadPage,
 
 
+
   ],
   providers: [
     StatusBar,
@@ -68,7 +78,11 @@ import { AuthProvider } from './../providers/auth/auth';
     {provide: ErrorHandler, useClass: IonicErrorHandler},
     PostsProvider,
     AuthProvider,
-    UsercontentProvider
+    UsercontentProvider,
+    Camera,
+
+
+
   ]
 })
 export class AppModule {}

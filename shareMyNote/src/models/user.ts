@@ -1,9 +1,10 @@
-export interface User {
 
+
+export interface User {
   email:string,
   password:string,
   repassword?:string,
-  name?:string
+  name?:string,
 
 
 
