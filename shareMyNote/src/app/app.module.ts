@@ -21,6 +21,8 @@ import { RegisterPage } from './../pages/register/register';
 import { PostPage } from './../pages/post/post';
 import { DiscussionPage } from './../pages/discussion/discussion';
 import { UploadPage } from './../pages/upload/upload';
+import { UploadDiscussionPage } from './../pages/upload-discussion/upload-discussion';
+
 
 
 import { StatusBar } from '@ionic-native/status-bar';
@@ -41,6 +43,7 @@ import { AuthProvider } from './../providers/auth/auth';
     PostPage,
     DiscussionPage,
     UploadPage,
+    UploadDiscussionPage
 
 
   ],
@@ -68,6 +71,7 @@ import { AuthProvider } from './../providers/auth/auth';
     PostPage,
     DiscussionPage,
     UploadPage,
+    UploadDiscussionPage
 
 
 

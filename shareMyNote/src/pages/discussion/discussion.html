@@ -6,7 +6,7 @@
 -->
 <ion-header>
 
-    <ion-navbar>
+    <ion-navbar color="base">
         <button ion-button menuToggle>
           <ion-icon name="menu"></ion-icon>
         </button>
@@ -24,4 +24,10 @@
             <button ion-button small item-right color="niceblue">More</button>
         </ion-item>
     </ion-list>
+    <ion-fab right bottom>
+        <button ion-fab color="niceorange" (click)="directToCreatDiscussion()">
+            <ion-icon name="add"></ion-icon>
+        </button>
+    </ion-fab>
+
 </ion-content>

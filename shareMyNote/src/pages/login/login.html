@@ -13,16 +13,19 @@
         <img src="assets/imgs/logo1.svg">
         <div class="text_area">
             <form [formGroup]="loginForm" (ngSubmit)="redirectToHome(loginForm.value);">
+                <p class="error" *ngIf="errmsg">{{errmsg}}</p>
                 <ion-item class="inputs">
-                    <ion-input placeholder="Username" formControlName="email"></ion-input><br>
+                    <ion-input placeholder="Username" formControlName="email" maxlength="45"></ion-input><br>
                 </ion-item>
                 <p class="error" *ngIf="!loginForm.controls['email'].valid && loginForm.controls['email'].touched">Email is Required</p>
 
+
                 <br>
                 <ion-item class="inputs">
-                    <ion-input type="password" placeholder="Password" formControlName="password"></ion-input><br>
+                    <ion-input type="password" placeholder="Password" formControlName="password" maxlength="10"></ion-input><br>
                 </ion-item>
-                <p class="error" *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched">Password is Required</p>
+                <p class="error" *ngIf="!loginForm.controls['password'].valid && loginForm.controls['password'].touched && !loginForm.controls['email'].minLength">At Least 5 Characters Password is Required</p>
+
                 <br>
                 <div class="button_position">
                     <button ion-button round class="buttons" [disabled]="!loginForm.valid" type="submit">SignIn</button>

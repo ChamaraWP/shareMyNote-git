@@ -5,23 +5,27 @@
         <div class="text_area">
             <form [formGroup]="registerForm" (ngSubmit)="singup(registerForm.value)">
                 <ion-item class="inputs">
-                    <ion-input placeholder="Username" formControlName="username"></ion-input><br>
+                    <ion-input placeholder="Username" formControlName="username" maxlength="12"></ion-input><br>
                 </ion-item>
+                <p class="error" *ngIf="!registerForm.controls['username'].valid && registerForm.controls['username'].touched && !registerForm.controls['username'].minLength">At Least 4 Character Username is Required</p>
                 <br>
                 <ion-item class="inputs">
-                    <ion-input placeholder="Email" formControlName="email"></ion-input><br>
+                    <ion-input placeholder="Email" formControlName="email" maxlength="45"></ion-input><br>
                 </ion-item>
+                <p class="error" *ngIf="!registerForm.controls['email'].valid && registerForm.controls['email'].touched">Email is Required</p>
                 <br>
                 <ion-item class="inputs">
-                    <ion-input placeholder="Password" formControlName="password"></ion-input><br>
+                    <ion-input placeholder="Password" formControlName="password" maxlength="10"></ion-input><br>
                 </ion-item>
+                <p class="error" *ngIf="!registerForm.controls['password'].valid && registerForm.controls['password'].touched && !registerForm.controls['password'].minLength ">At Least 5 Character Password is Required</p>
                 <br>
                 <ion-item class="inputs">
-                    <ion-input placeholder="Re-Password" formControlName="repassword"></ion-input><br>
+                    <ion-input placeholder="Re-Password" formControlName="repassword" maxlength="10"></ion-input><br>
                 </ion-item>
+                <p class="error" *ngIf="!registerForm.controls['repassword'].valid && registerForm.controls['repassword'].touched && !registerForm.controls['repassword'].minLength">ReEnter Password is Required</p>
                 <br>
                 <div class="button_position">
-                    <button ion-button round class="buttons">SingUp</button>
+                    <button ion-button round class="buttons" [disabled]="!registerForm.valid">SingUp</button>
                     <h6>Back to login<a (click)="redirectToSignin();"> click here</a></h6>
                 </div>
             </form>

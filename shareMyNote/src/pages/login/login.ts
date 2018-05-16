@@ -17,13 +17,14 @@ export class LoginPage {
   user = {} as User;
   email:AbstractControl;
   password:AbstractControl;
+  errmsg:any;
 
   constructor(public navCtrl: NavController, public navParams: NavParams, private authprovider:AuthProvider,public frmBuilder:FormBuilder) {
     this.loginForm = this.frmBuilder.group({
-      email:['',[Validators.required,Validators.email]],
+      email:['',Validators.compose([Validators.required,Validators.email])],
       password:['',[Validators.required,Validators.minLength(5),Validators.maxLength(10)]]
     });
-
+    this.errmsg ='';
 
   }
 
@@ -42,10 +43,10 @@ export class LoginPage {
          .then(() => { // to use default animation and add Homepage as Root
           this.navCtrl.popToRoot()}),
            (err) =>
-             console.log('Wrong Email and Password cant proceed')
+             this.errmsg = 'Not a Registerd User'
        );
     }else{
-      console.error('Filed are not valid');
+      this.errmsg='Filed are not valid'
 
     }
 

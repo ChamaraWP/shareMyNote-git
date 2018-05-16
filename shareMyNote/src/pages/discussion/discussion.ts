@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { PostsProvider } from './../../providers/posts/posts';
+import { UploadDiscussionPage } from '../upload-discussion/upload-discussion';
 
 /**
  * Generated class for the DiscussionPage page.
@@ -24,7 +25,9 @@ export class DiscussionPage {
       .subscribe(discussionList => this.allDiscussion = discussionList);
   }
 
-
+  directToCreatDiscussion(){
+    this.navCtrl.push(UploadDiscussionPage);
+  }
 
 
 }

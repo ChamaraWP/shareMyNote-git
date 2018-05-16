@@ -1,3 +1,4 @@
+import { UploadDiscussionPage } from './../pages/upload-discussion/upload-discussion';
 
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Component, ViewChild } from '@angular/core';
@@ -32,8 +33,9 @@ export class MyApp {
     this.pages = [
       { title: 'Home', component: HomePage },
       { title: 'List', component: ListPage },
-      { title :'Create New Post',component:UploadPage},
-      { title :'Discussions',component:DiscussionPage}
+      { title :'Create Post',component:UploadPage},
+      { title :'Discussions',component:DiscussionPage},
+      {title: 'Creat Discussion',component:UploadDiscussionPage}
 
     ];
 

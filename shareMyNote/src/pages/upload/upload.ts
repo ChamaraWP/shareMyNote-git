@@ -3,6 +3,7 @@ import { post } from './../../models/post';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
 import { Camera, CameraOptions } from '@ionic-native/camera';
+import { FormGroup,FormBuilder,Validators,AbstractControl } from '@angular/forms';
 
 
 
@@ -19,18 +20,34 @@ import { Camera, CameraOptions } from '@ionic-native/camera';
   templateUrl: 'upload.html',
 })
 export class UploadPage {
-
+  uploadForm:FormGroup;
   userPost = {} as post;
-  constructor(public navCtrl: NavController, public navParams: NavParams,private postProvider:PostsProvider,private camera:Camera) {
+  subject:AbstractControl;
+  lessonNumber:AbstractControl;
+  description:AbstractControl;
+
+  constructor(public navCtrl: NavController, public navParams: NavParams,private postProvider:PostsProvider,private camera:Camera,public frmBuilder:FormBuilder) {
+    this.uploadForm = frmBuilder.group({
+      subject:['',[Validators.required,Validators.minLength(2),Validators.maxLength(15)]],
+      lessonNumber:['',[Validators.required,Validators.minLength(1),Validators.maxLength(5)]],
+      description:['',[Validators.required,Validators.minLength(20),Validators.maxLength(1000)]]
+    })
+
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad UploadPage');
   }
 
-  uploadPost(userPost){
-    console.log(userPost);
-    this.postProvider.setPost(userPost);
+  uploadPost(value:any){
+    if(this.uploadForm.valid){
+      this.userPost.subject = value.subject;
+      this.userPost.lessonNumber = Number(value.lessonNumber);
+      this.userPost.description = value.description;
+      console.log(this.userPost);
+      //this.postProvider.setPost(this.userPost);
+    }
+
   }
 
   getImages(){
