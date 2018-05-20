@@ -5,4 +5,5 @@ export interface post {
   lessonNumber:number,
   description:string
   photos:string[],
+  comments?:string,
 }

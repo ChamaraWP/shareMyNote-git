@@ -43,8 +43,8 @@ export class HomePage {
     loader.present()
        this.postProvider.getPosts()
          .subscribe((postsList) => {
-            loader.dismiss();
              this.allPost = postsList});
+              loader.dismiss();
     }
 
   directToPost(){

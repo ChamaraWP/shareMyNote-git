@@ -11,6 +11,7 @@ import { FIREBASE_CONFIG } from './app.firebase.config'
 import { Camera } from '@ionic-native/camera'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { ImagePicker } from '@ionic-native/image-picker';
 
 
 import { MyApp } from './app.component';
@@ -84,6 +85,7 @@ import { AuthProvider } from './../providers/auth/auth';
     AuthProvider,
     UsercontentProvider,
     Camera,
+    ImagePicker
 
 
 
