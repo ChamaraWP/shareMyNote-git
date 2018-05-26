@@ -1,3 +1,4 @@
+import { AngularFireDatabase } from 'angularfire2/database';
 import { PostsProvider } from './../../providers/posts/posts';
 import { post } from './../../models/post';
 import { Component } from '@angular/core';
@@ -5,6 +6,9 @@ import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angul
 import { Camera, CameraOptions } from '@ionic-native/camera';
 import { FormGroup,FormBuilder,Validators,AbstractControl } from '@angular/forms';
 import { ImagePicker } from '@ionic-native/image-picker';
+import 'rxjs/add/operator/map';
+import firebase from 'firebase';
+import { File } from '@ionic-native/file';
 
 
 
@@ -26,6 +30,7 @@ export class UploadPage {
   subject:AbstractControl;
   lessonNumber:AbstractControl;
   description:AbstractControl;
+  public images = [];
 
   constructor(public navCtrl: NavController,
     public navParams: NavParams,
@@ -33,7 +38,9 @@ export class UploadPage {
     private camera:Camera,
     public frmBuilder:FormBuilder,
     public toastController:ToastController,
-    private imgPicker:ImagePicker) {
+    private imgPicker:ImagePicker,
+    private file:File
+    ) {
     this.uploadForm = frmBuilder.group({
       subject:['',[Validators.required,Validators.minLength(2),Validators.maxLength(15)]],
       lessonNumber:['',[Validators.required,Validators.minLength(1),Validators.maxLength(5)]],
@@ -47,27 +54,36 @@ export class UploadPage {
   }
 
   uploadPost(value:any){
-
-    let toast = this.toastController.create({
+   let toast = this.toastController.create({
       message:'Post uploaded successfully',
       duration:3000
 
     })
+
     if(this.uploadForm.valid){
-      this.userPost.subject = value.subject;
-      this.userPost.lessonNumber = Number(value.lessonNumber);
-      this.userPost.description = value.description;
-      console.log(this.userPost);
-      this.postProvider.setPost(this.userPost);
-      toast.present();
-      this.uploadForm.reset();
-    }else{
+
+      if(this.images.length > 0){
+        for (var i=0; i<this.images.length; i++) {
+          console.log('this is inside the post'+this.images[i]);
+          firebase.storage().ref('/images').putString(this.images[i], 'base64',{contentType: 'image/jpg'}).then((data)=>{
+            this.userPost.photos[i]=data.downloadURL
+            console.log( 'this is download url '+this.userPost.photos[i]);
+          })
+        }
+      }
+        this.userPost.subject = value.subject;
+        this.userPost.lessonNumber = Number(value.lessonNumber);
+        this.userPost.description = value.description;
+        console.log(this.userPost);
+        this.postProvider.setPost(this.userPost);
+        toast.present();
+        this.uploadForm.reset();
+        this.images=[];
+
+   }else{
       console.log('Post Upload Faild');
-
-    }
-
-
-  }
+   }
+}
 
   getImages(){
     let option = {
@@ -77,12 +93,24 @@ export class UploadPage {
       outType:1
     }
     this.imgPicker.getPictures(option).then((results) => {
-      for (var i = 0; i < results.length; i++) {
-        console.log('Image URI: ' + results[i]);
+      for(let i=0; i < results.length;i++){
+      this.file.resolveLocalFilesystemUrl(results[i]).then((newUrl)=>{
+        console.log('newUrl'+newUrl);
+        let dirPath = newUrl.nativeURL;
+        let dirPathSegment = dirPath.split('/')
+        dirPathSegment.pop()
+        dirPath = dirPathSegment.join('/')
+
+
+        this.file.readAsArrayBuffer(dirPath,newUrl.name).then((buffer)=>{
+            console.log(buffer);
+            this.upload(buffer,newUrl.name);
+        })
+
+      })
     }
     },(err)=> {
       console.log("Get Image faild");
-
     })
 
    /* this.camera.getPicture({
@@ -104,5 +132,11 @@ export class UploadPage {
     })*/
   }
 
+ upload(buffer,name){
+    let blob = new Blob([buffer],{type:"image/jpeg"});
+    firebase.storage().ref('images/'+name).put(blob).then((results)=>{
+      console.log(results.downloadURL);
+    })
+ }
 
 }

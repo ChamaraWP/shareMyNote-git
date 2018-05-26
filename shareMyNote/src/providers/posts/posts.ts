@@ -39,6 +39,7 @@ export class PostsProvider {
     this.firebase.list(`/allPosts`).push(userPost);
  }
 
+
  setComments(){
    //this.firebase.list().push();
  }

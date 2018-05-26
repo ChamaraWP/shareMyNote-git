@@ -5,6 +5,7 @@ import { RegisterPage } from './../register/register';
 import { HomePage } from './../home/home';
 import { User } from "../../models/user"
 import {FormGroup,FormBuilder,Validators,AbstractControl} from '@angular/forms'
+
 @IonicPage()
 @Component({
   selector: 'page-login',

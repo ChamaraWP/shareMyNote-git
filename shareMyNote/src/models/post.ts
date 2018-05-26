@@ -4,6 +4,6 @@ export interface post {
   category:string,
   lessonNumber:number,
   description:string
-  photos:string[],
+  photos:Array<string>,
   comments?:string,
 }
