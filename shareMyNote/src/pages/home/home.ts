@@ -1,4 +1,4 @@
-import { UsercontentProvider } from './../../providers/usercontent/usercontent';
+import { Observable } from 'rxjs/Observable';
 import { Component } from '@angular/core';
 import { NavController, ViewController,LoadingController } from 'ionic-angular';
 import { PostsProvider } from './../../providers/posts/posts';
@@ -10,20 +10,23 @@ import { UploadPage } from './../upload/upload';
 
 
 
+
+
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  public allPost = []
+  //public allPost = []
+  allPost:Observable<any[]>
   alive:boolean= false;
   menuIsHidden: boolean = false; // keep state of the togle button
 
+
   constructor(public navCtrl: NavController ,
     private viewController:ViewController,
-    private postProvider:PostsProvider,
     private loadinController:LoadingController,
-    private userCont:UsercontentProvider,
+    private pstProvider:PostsProvider
 
      ) {
 
@@ -37,18 +40,26 @@ export class HomePage {
 
   ionViewDidLoad(){
 
+
+
+
     let loader = this.loadinController.create({ //create loader present that in component
       content:"Getting Ready"
     });
     loader.present()
-       this.postProvider.getPosts()
-         .subscribe((postsList) => {
-             this.allPost = postsList});
-              loader.dismiss();
+        this.allPost = this.pstProvider.getAllPosts();
+        console.log(this.allPost);
+    loader.dismiss();
+
     }
 
-  directToPost(){
-    this.navCtrl.push(PostPage);
+  directToPost(postid:any){
+    console.log(postid);
+
+    this.navCtrl.push(PostPage,{param:postid});
+
+
+
   }
 
   directToUpload(){

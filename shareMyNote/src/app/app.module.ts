@@ -8,17 +8,10 @@ import { AngularFireModule } from 'angularfire2'
 import { AngularFireAuthModule } from 'angularfire2/auth'
 import { AngularFireDatabaseModule } from 'angularfire2/database'
 import { FIREBASE_CONFIG } from './app.firebase.config'
-import { Camera } from '@ionic-native/camera'
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { File } from '@ionic-native/file';
-
-
-
-
-
-
 
 
 import { MyApp } from './app.component';
@@ -91,7 +84,6 @@ import { AuthProvider } from './../providers/auth/auth';
     PostsProvider,
     AuthProvider,
     UsercontentProvider,
-    Camera,
     ImagePicker,
     File
 

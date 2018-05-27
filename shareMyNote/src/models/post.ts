@@ -3,7 +3,7 @@ export interface post {
   subject:string,
   category:string,
   lessonNumber:number,
-  description:string
-  photos:Array<string>,
-  comments?:string,
+  description:string,
+  photos:Array<String>,
+  comments?:Array<String>,
 }

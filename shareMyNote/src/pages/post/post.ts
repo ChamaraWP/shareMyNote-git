@@ -23,20 +23,24 @@ export class PostPage {
  userID:string = null
  comments:string = null
  postObservableList:FirebaseListObservable<post[]>;
-
+ userPost = {} as post;
+ postID;
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
      public modelController:ModalController,
      public alertController:AlertController,
-     private postProvider:PostsProvider
+
      ) {
 
-
+      this.userPost.comments = [];
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PostPage');
+    this.postID = this.navParams.get('param');
+    console.log(this.postID);
+
   }
 
   openCommentModal(){

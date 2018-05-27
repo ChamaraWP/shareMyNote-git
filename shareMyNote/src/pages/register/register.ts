@@ -1,5 +1,5 @@
 import { LoginPage } from './../login/login';
-import { AuthProvider } from './../../providers/auth/auth';
+//import { AuthProvider } from './../../providers/auth/auth';
 import { User } from './../../models/user';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
@@ -26,7 +26,7 @@ export class RegisterPage {
   repassword:AbstractControl;
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private authprovider:AuthProvider,public frmBuilder:FormBuilder) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public frmBuilder:FormBuilder) {
     this.registerForm = frmBuilder.group({
       username:['',[Validators.required,Validators.minLength(4),Validators.maxLength(12)]],
       email:['',[Validators.required,Validators.email,Validators.minLength(8),Validators.maxLength(30)]],
