@@ -13,11 +13,14 @@
 
 
 <ion-content padding>
-    <h3>Post Name</h3>
-    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Molestiae officiis autem eius laudantium debitis culpa doloribus fugit beatae neque praesentium reiciendis, quod blanditiis sint commodi illo laboriosam dolores voluptatem nisi?
-    </p>
-    <h6>Media</h6>
-    <p>Images goes here</p>
+    <h3>{{postData.subject}}</h3>
+    <h4>Lesson Number:{{postData.lessonNumber}}</h4>
+    <p>{{postData.description}}</p>
+    <ion-row *ngIf="postData.photos">
+        <ion-item class="imageblock" *ngFor="let photo of postData.photos  ">
+            <img [src]=photo>
+        </ion-item>
+    </ion-row>
     <hr>
     <h6>Comments</h6>
     <ion-list>
@@ -34,6 +37,4 @@
             <ion-icon name="add-circle"></ion-icon>
         </button>
     </ion-fab>
-
-
 </ion-content>

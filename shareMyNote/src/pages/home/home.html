@@ -10,12 +10,12 @@
 <ion-content padding>
     <h4>Latest Update</h4>
     <ion-list>
-        <ion-item *ngFor="let post of allPost | async">
-            <!--<ion-avatar item-start>
-                <img [src]=post.image>
-            </ion-avatar>-->
+        <ion-item *ngFor="let post of (allPost | async)">
+            <ion-avatar item-start>
+                <img [src]=post.photos[0]>
+            </ion-avatar>
             <h2><b>{{post.subject}}</b></h2>
-            <h3>{{post.lessonNumber}}</h3>
+            <h3>Lesson Number : {{post.lessonNumber}}</h3>
             <p>{{post.description}}</p>
 
             <!--<button ion-button small item-right color="niceblue" (click)="directToPost()"></button>-->
