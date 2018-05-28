@@ -29,6 +29,7 @@ export class UploadPage {
   lessonNumber:AbstractControl;
   description:AbstractControl;
   public images = [];
+  imageCount:any;
 
 
   constructor(public navCtrl: NavController,
@@ -67,12 +68,14 @@ export class UploadPage {
         toast.present();
         this.uploadForm.reset();
         this.userPost.photos=[];
+        this.imageCount="";
     }else{
       console.log('Post Upload Faild');
    }
 }
 
    getImages(){
+    this.userPost.photos = [];
     let option = {
       title:"Selec Your Images",
       message:'You can only select 5 Images',
@@ -80,6 +83,7 @@ export class UploadPage {
       outType:1
     }
     this.imgPicker.getPictures(option).then((results) => {
+      this.imageCount= results.length;
       for(let i=0; i < results.length;i++){
       this.file.resolveLocalFilesystemUrl(results[i]).then((newUrl)=>{
         console.log('newUrl'+newUrl);

@@ -31,7 +31,7 @@ export class HomePage {
     private viewController:ViewController,
     private loadinController:LoadingController,
     private pstProvider:PostsProvider,
-    private firebase:AngularFireDatabase
+
 
      ) {
 

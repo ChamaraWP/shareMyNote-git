@@ -2,7 +2,7 @@
 
     <ion-content>
         <ion-card class="user_area" no-padding>
-            <h3 class="user_cont"><b>User Name</b></h3>
+            <h3 class="user_cont"><b>{{loginEmail}}</b></h3>
         </ion-card>
         <ion-list>
             <button menuClose ion-item *ngFor="let p of pages" (click)="openPage(p)">

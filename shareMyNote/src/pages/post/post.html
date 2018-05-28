@@ -6,10 +6,12 @@
 -->
 <ion-header>
     <ion-navbar color="base">
+
         <ion-title>Post</ion-title>
     </ion-navbar>
 
 </ion-header>
+
 
 
 <ion-content padding>
@@ -19,7 +21,7 @@
     <p>{{postData.description}}</p>
     <ion-row *ngIf="postData.photos">
         <ion-item class="imageblock" *ngFor="let photo of postData.photos  ">
-            <img [src]=photo>
+            <img [src]=photo (click)="openPhotoModal(photo)">
         </ion-item>
     </ion-row>
     <hr>

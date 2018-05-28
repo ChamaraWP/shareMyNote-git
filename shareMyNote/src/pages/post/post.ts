@@ -1,3 +1,4 @@
+import { FavPage } from './../fav/fav';
 import { Observable } from 'rxjs/Observable';
 import { post } from './../../models/post';
 import { PostsProvider } from './../../providers/posts/posts';
@@ -37,7 +38,9 @@ export class PostPage {
      public modelController:ModalController,
      public alertController:AlertController,
      private pstProvider:PostsProvider,
-     private firebase:AngularFireDatabase
+     private firebase:AngularFireDatabase,
+     public modalCtrl: ModalController
+
      ) {
     this.userPost.comments = [];
   }
@@ -51,11 +54,7 @@ export class PostPage {
     this.postObservable.snapshotChanges().subscribe((data) => {
     this.postData = data.payload.val();
     console.log(this.postData);
-
-    })
-
-
-
+  })
 }
 
 
@@ -90,12 +89,7 @@ export class PostPage {
         handler: (data) => {
           console.log(data);
           data.name=this.username;
-
-           /*let commentsObj = {
-             name:this.username,
-             comm:data
-           }*/
-           if(this.checkProperties(data)){
+          if(this.checkProperties(data)){
             console.log("Cant Post Empty Comments");
             this.err = 'Cant Post Empty Comments';
           }else{
@@ -106,7 +100,11 @@ export class PostPage {
     }).present()
 
   }
-  ionViewDidLeave(){
+
+  openPhotoModal(photo){
+    console.log(photo);
+    let photoViewer = this.modalCtrl.create(FavPage,{image:photo});
+    photoViewer.present();
 
   }
 

@@ -1,17 +1,13 @@
-import { UploadDiscussionPage } from './../pages/upload-discussion/upload-discussion';
-
 import { AngularFireAuth } from 'angularfire2/auth';
 import { Component, ViewChild } from '@angular/core';
 import { Nav, Platform } from 'ionic-angular';
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
-
 import { HomePage } from '../pages/home/home';
-import { ListPage } from '../pages/list/list';
 import { LoginPage } from '../pages/login/login';
 import { DiscussionPage } from './../pages/discussion/discussion';
-import { UploadPage } from './../pages/upload/upload';
 import { MenuController } from 'ionic-angular';
+
 
 
 
@@ -23,21 +19,26 @@ export class MyApp {
 
   //rootPage: any = HomePage;
   rootPage: any = LoginPage;
+  loginEmail:any;
 
   pages: Array<{title: string, component: any}>;
 
   constructor(public platform: Platform, public statusBar: StatusBar, public splashScreen: SplashScreen, private afAuth:AngularFireAuth,public menuCtrl:MenuController) {
+
     this.initializeApp();
 
     // used for an example of ngFor and navigation
     this.pages = [
-      { title: 'Home', component: HomePage },
-      { title: 'List', component: ListPage },
-      { title :'Create Post',component:UploadPage},
-      { title :'Discussions',component:DiscussionPage},
-      {title: 'Creat Discussion',component:UploadDiscussionPage}
+      { title: 'Notes', component: HomePage },
+      { title :'Discussions',component:DiscussionPage}
 
-    ];
+      ];
+
+      this.afAuth.authState
+      .subscribe((data )=> {
+        this.loginEmail = data.email;
+           console.log(this.loginEmail);
+    });
 
   }
 
