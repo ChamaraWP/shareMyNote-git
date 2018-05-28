@@ -90,6 +90,7 @@ export class PostsProvider {
  }
 
  getAllCommentsOnDisc(discID){
+  console.log('This function fires get All CommetsOn'+ discID);
   let ref = this.firebase.list(`/allDiscussion/${discID}/comments`).snapshotChanges().map((changes)=>{
     return changes.map( c => ({
       key:c.payload.key,...c.payload.val()}))

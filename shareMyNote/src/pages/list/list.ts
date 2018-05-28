@@ -21,11 +21,10 @@ export class ListPage {
     this.discussion = this.navParams.get('post')
     console.log(this.discussion);
   }
-  ionViewWillEnter(){
 
-  }
   ionViewDidLoad(){
     console.log(this.discussion);
+
     this.postedComment = this.pstProvider.getAllCommentsOnDisc(this.discussion.key);
     this.postedComment.subscribe((data)=>{
       console.log("LogData "+data);
@@ -49,17 +48,14 @@ export class ListPage {
       {
         text:'Post',
         role:'submit',
-        handler: (data:string ) => {
-           let commentsObj = {
-             name:this.discussion.username,
-             comm:data
-           }
+        handler: (data ) => {
+           data.name=this.discussion.username;
            if( this.checkProperties(data)){
             console.log("Cant Post Empty Comments");
             this.err = 'Cant Post Empty Comments';
           }else{
 
-            this.pstProvider.setDiscussionComments(commentsObj,this.discussion.key);
+            this.pstProvider.setDiscussionComments(data,this.discussion.key);
           }
         }
      }]

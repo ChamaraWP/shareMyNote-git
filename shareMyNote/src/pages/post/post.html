@@ -25,12 +25,12 @@
     <hr>
     <h6>Comments</h6>
     <ion-list>
-        <ion-item *ngFor="let comment of (postedComment | async)">
+        <ion-item *ngFor="let comment2 of (postedComment| async); let i= index">
             <ion-avatar item-start>
                 <img src="assets/imgs/user.svg">
             </ion-avatar>
-            <h2>{{comment.key.name}}</h2>
-            <p>{{comment.key.comm.comment}}</p>
+            <h2>{{comment2.name}}</h2>
+            <p>{{comment2.comment}}</p>
         </ion-item>
     </ion-list>
 

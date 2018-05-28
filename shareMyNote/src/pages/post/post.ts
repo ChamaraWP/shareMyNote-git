@@ -26,6 +26,7 @@ export class PostPage {
  postObservable:AngularFireObject<any>
  userPost = {} as post;
  postID;
+ postID2;
  postData={} as post;
  username;
  err:any;
@@ -53,13 +54,20 @@ export class PostPage {
 
     })
 
+
+
 }
 
 
   ionViewDidLoad() {
+    this.postID2 = this.navParams.get('param');
    this.username = this.navParams.get('name');
-    console.log('ionViewDidLoad PostPage');
-    this.postedComment = this.pstProvider.getAllComments(this.postID);
+    console.log('ionViewDidLoad PostPage'+this.postID2);
+
+    this.postedComment = this.pstProvider.getAllComments(this.postID2);
+    this.postedComment.subscribe((data)=>{
+      console.log("LogDataPost "+ data);
+    })
 }
 
   openCommentModal(){
@@ -81,17 +89,17 @@ export class PostPage {
         role:'submit',
         handler: (data) => {
           console.log(data);
+          data.name=this.username;
 
-
-           let commentsObj = {
+           /*let commentsObj = {
              name:this.username,
              comm:data
-           }
+           }*/
            if(this.checkProperties(data)){
             console.log("Cant Post Empty Comments");
             this.err = 'Cant Post Empty Comments';
           }else{
-            this.pstProvider.setComments(commentsObj,this.postID);
+            this.pstProvider.setComments(data,this.postID);
           }
         }
      }]
