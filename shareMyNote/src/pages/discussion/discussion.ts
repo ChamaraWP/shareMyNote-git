@@ -1,7 +1,9 @@
+import { ListPage } from './../list/list';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
 import { PostsProvider } from './../../providers/posts/posts';
 import { UploadDiscussionPage } from '../upload-discussion/upload-discussion';
+import { Observable } from 'rxjs/Observable';
 
 /**
  * Generated class for the DiscussionPage page.
@@ -16,24 +18,30 @@ import { UploadDiscussionPage } from '../upload-discussion/upload-discussion';
   templateUrl: 'discussion.html',
 })
 export class DiscussionPage {
-  public allDiscussion = []
-  constructor(public navCtrl: NavController, public navParams: NavParams, private postProvider:PostsProvider, public loader:LoadingController ) {
+  Discussions:Observable<any[]>
+  constructor(public navCtrl: NavController, public navParams: NavParams, private pstProvider:PostsProvider, public loader:LoadingController ) {
   }
 
   ionViewDidLoad() {
-    let loader = this.loader.create({
+   let loader = this.loader.create({
       content:'Getting Ready'
     })
     loader.present()
-    this.postProvider.getPosts()
-      .subscribe(discussionList => {
-        this.allDiscussion = discussionList});
-         loader.dismiss();
+     this.Discussions =  this.pstProvider.getAllDescussion();
+    console.log(this.Discussions);
+
+    loader.dismiss();
   }
 
   directToCreatDiscussion(){
+    //console.log(values);
     this.navCtrl.push(UploadDiscussionPage);
   }
 
+   directDicussionPage(discussion){
+
+     this.navCtrl.push(ListPage,{post:discussion})
+
+  }
 
 }

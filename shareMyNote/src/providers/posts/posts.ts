@@ -1,4 +1,3 @@
-import { Observable } from 'rxjs/Observable';
 import { AngularFireDatabase } from 'angularfire2/database';
 import { post } from './../../models/post';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -14,7 +13,7 @@ import 'rxjs/add/operator/map'
   See https://angular.io/guide/dependency-injection for more info on providers
   and Angular DI.
 */
-const API:string = "http://orangevalleycaa.org/api/music";
+
 @Injectable()
 export class PostsProvider {
  public userID:string = null
@@ -27,35 +26,18 @@ export class PostsProvider {
         this.userID = data.uid;
            console.log(this.userID);
     });
-}
-
-  /*getPosts(){
-    return this.http.get<any>(API)
-      .map(response => response);
-  }*/
+  }
 
   getAllPosts(){
     let ref = this.firebase.list('/allPosts/').snapshotChanges().map((changes)=>{
         return changes.map( c => ({
           key:c.payload.key,...c.payload.val()}))
     });
-  return ref;
-
+    return ref;
   }
 
   getUserName(){
-    let username:any
-   let usn = this.firebase.object(`userProfile/${this.userID}`).snapshotChanges().subscribe((data)=>{
-      console.log("username"+data);
-      username=data.payload.val();
-      return username.username
-    });
-
-    console.log("Hello"+usn);
-    return usn;
-
-
-
+    return this.firebase.object(`userProfile/${this.userID}`);
   }
 
   setPost(userPost:post){
@@ -68,18 +50,51 @@ export class PostsProvider {
  }
 
 
- setComments(){
-   //this.firebase.list().push();
+ setComments(commentsObj,postID){
+   console.log('test Comment'+commentsObj);
+   this.firebase.list(`allPosts/${postID}/comments`).push(commentsObj);
  }
 
  getPost(postId:any){
-   console.log('post service post id'+ postId);
 
-   let ref = this.firebase.object(`userProfile/${postId}`).snapshotChanges().map((changes)=>{
-     return changes.payload.toJSON();
-   })
-
-   return ref;
 }
+
+ getAllDescussion(){
+  let ref = this.firebase.list('/allDiscussion/').snapshotChanges().map((changes)=>{
+    return changes.map( c => ({
+      key:c.payload.key,...c.payload.val()}))
+    });
+  return ref;
+ }
+
+ getDiscussion(){
+
+ }
+
+ setDiscussion(values:any){
+   console.log(values);
+   this.firebase.list(`allDiscussion/`).push(values);
+ }
+
+ setDiscussionComments(commentsObj,postID){
+  console.log('test Comment'+commentsObj);
+   this.firebase.list(`allDiscussion/${postID}/comments`).push(commentsObj);
+ }
+
+ getAllComments(postID){
+  let ref = this.firebase.list(`/allPosts/${postID}/comments`).snapshotChanges().map((changes)=>{
+    return changes.map( c => ({
+      key:c.payload.key,...c.payload.val()}))
+    });
+  return ref;
+ }
+
+ getAllCommentsOnDisc(discID){
+  let ref = this.firebase.list(`/allDiscussion/${discID}/comments`).snapshotChanges().map((changes)=>{
+    return changes.map( c => ({
+      key:c.payload.key,...c.payload.val()}))
+    });
+  return ref;
+ }
 
 }

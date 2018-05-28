@@ -1,23 +1,28 @@
 <ion-header>
-  <ion-navbar>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
-    <ion-title>List</ion-title>
-  </ion-navbar>
+    <ion-navbar color="base">
+
+        <ion-title>Discussion</ion-title>
+    </ion-navbar>
 </ion-header>
 
-<ion-content>
-  <ion-list>
-    <button ion-item *ngFor="let item of items" (click)="itemTapped($event, item)">
-      <ion-icon [name]="item.icon" item-start></ion-icon>
-      {{item.title}}
-      <div class="item-note" item-end>
-        {{item.note}}
-      </div>
-    </button>
-  </ion-list>
-  <div *ngIf="selectedItem" padding>
-    You navigated here from <b>{{selectedItem.title}}</b>
-  </div>
+<ion-content padding>
+
+    <p class="error" *ngIf="err">{{err}}</p>
+    <ion-list>
+        <h3>{{discussion.qstion}}</h3>
+        <h5>Posted by : {{discussion.username}}</h5>
+        <p>{{discussion.description}}</p>
+        <ion-item *ngFor="let comment of (postedComment | async); let i = index">
+            <ion-avatar item-start>
+                <img src="assets/imgs/user.svg">
+            </ion-avatar>
+            <h2>{{comment.name}}</h2>
+            <p>{{comment.comm.comment}}</p>
+        </ion-item>
+    </ion-list>
+    <ion-fab right bottom>
+        <button ion-fab color="niceorange" (click)="openCommentModal()">
+            <ion-icon name="add-circle"></ion-icon>
+        </button>
+    </ion-fab>
 </ion-content>

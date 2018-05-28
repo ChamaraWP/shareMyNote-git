@@ -18,10 +18,10 @@
 
 <ion-content padding>
     <ion-list>
-        <ion-item *ngFor="let discussion of allDiscussion">
-            <h2>{{discussion.name}}</h2>
+        <ion-item *ngFor="let discussion of (Discussions | async)">
+            <h2>{{discussion.qstion}}</h2>
             <p>{{discussion.description}}</p>
-            <button ion-button small item-right color="niceblue">More</button>
+            <button ion-button small item-right color="niceblue" (click)="directDicussionPage(discussion)">More</button>
         </ion-item>
     </ion-list>
     <ion-fab right bottom>

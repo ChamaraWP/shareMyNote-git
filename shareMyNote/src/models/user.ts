@@ -5,7 +5,4 @@ export interface User {
   password:string,
   repassword?:string,
   name?:string,
-
-
-
 }

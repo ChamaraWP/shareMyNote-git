@@ -1,10 +1,10 @@
+import { Observable } from 'rxjs/Observable';
 import { post } from './../../models/post';
 import { PostsProvider } from './../../providers/posts/posts';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController,AlertController} from 'ionic-angular';
 import { AngularFireObject, AngularFireDatabase } from 'angularfire2/database';
-import { Observable } from 'rxjs/Observable';
-//import { Observable } from 'rxjs/Observable';
+
 
 
 
@@ -27,7 +27,9 @@ export class PostPage {
  userPost = {} as post;
  postID;
  postData={} as post;
- userDetails:any;
+ username;
+ err:any;
+ postedComment:Observable<any[]>
 
   constructor(public navCtrl: NavController,
      public navParams: NavParams,
@@ -36,8 +38,7 @@ export class PostPage {
      private pstProvider:PostsProvider,
      private firebase:AngularFireDatabase
      ) {
-
-      this.userPost.comments = [];
+    this.userPost.comments = [];
   }
 
   ionViewWillEnter(){
@@ -48,28 +49,21 @@ export class PostPage {
     this.postObservable = this.firebase.object(`allPosts/${this.postID}`);
     this.postObservable.snapshotChanges().subscribe((data) => {
     this.postData = data.payload.val();
+    console.log(this.postData);
+
     })
-
-
 
 }
 
 
   ionViewDidLoad() {
+   this.username = this.navParams.get('name');
     console.log('ionViewDidLoad PostPage');
-    console.log(this.postData);
- /* this.postID = this.navParams.get('param');
-    console.log(this.postID);
-
-    this.postObservable = this.firebase.object(`allPosts/${this.postID}`);
-    this.postObservable.snapshotChanges().subscribe((data) => {
-      this.postData = data.payload.val();
-      console.log(this.postData.subject);
- })*/
-
+    this.postedComment = this.pstProvider.getAllComments(this.postID);
 }
 
   openCommentModal(){
+    this.err = ""
     console.log(this.postData);
 
     this.alertController.create({
@@ -85,9 +79,20 @@ export class PostPage {
       {
         text:'Post',
         role:'submit',
-        handler: (data ) => {
-           console.log(data.comment)
+        handler: (data) => {
+          console.log(data);
 
+
+           let commentsObj = {
+             name:this.username,
+             comm:data
+           }
+           if(this.checkProperties(data)){
+            console.log("Cant Post Empty Comments");
+            this.err = 'Cant Post Empty Comments';
+          }else{
+            this.pstProvider.setComments(commentsObj,this.postID);
+          }
         }
      }]
     }).present()
@@ -96,5 +101,14 @@ export class PostPage {
   ionViewDidLeave(){
 
   }
+
+  checkProperties(obj) {
+    for (var key in obj) {
+        if (obj[key] !== null && obj[key] != "")
+            return false;
+    }
+    return true;
+  }
+
 
 }

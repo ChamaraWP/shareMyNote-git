@@ -13,6 +13,7 @@
 
 
 <ion-content padding>
+    <p class="error" *ngIf="err">{{err}}</p>
     <h3>{{postData.subject}}</h3>
     <h4>Lesson Number:{{postData.lessonNumber}}</h4>
     <p>{{postData.description}}</p>
@@ -24,14 +25,15 @@
     <hr>
     <h6>Comments</h6>
     <ion-list>
-        <ion-item>
+        <ion-item *ngFor="let comment of (postedComment | async)">
             <ion-avatar item-start>
                 <img src="assets/imgs/user.svg">
             </ion-avatar>
-            <h2>Finn</h2>
-            <p>I've had a pretty messed up day. If we just...</p>
+            <h2>{{comment.key.name}}</h2>
+            <p>{{comment.key.comm.comment}}</p>
         </ion-item>
     </ion-list>
+
     <ion-fab right bottom>
         <button ion-fab color="niceorange" (click)="openCommentModal()">
             <ion-icon name="add-circle"></ion-icon>
