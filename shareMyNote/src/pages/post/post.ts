@@ -2,7 +2,7 @@ import { Observable } from 'rxjs/Observable';
 import { post } from './../../models/post';
 import { PostsProvider } from './../../providers/posts/posts';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, ModalController,AlertController} from 'ionic-angular';
+import { IonicPage, NavController, NavParams, ModalController, AlertController, LoadingController } from 'ionic-angular';
 import { AngularFireObject } from 'angularfire2/database';
 import { PhotoviewPage } from '../photoview/photoview';
 
@@ -38,7 +38,8 @@ export class PostPage {
      public alertController:AlertController,
      private pstProvider:PostsProvider,
      /*private firebase:AngularFireDatabase,*/
-     public modalCtrl: ModalController
+     public modalCtrl: ModalController,
+     private loader:LoadingController
 
      ) {
     this.userPost.comments = [];
@@ -62,9 +63,13 @@ export class PostPage {
 
 
   ionViewDidLoad() {
-
+    let loader = this.loader.create({
+      content:'Getting Ready'
+    })
+    loader.present()
     this.username = this.navParams.get('name');
     console.log('ionViewDidLoad PostPage '+ this.username);
+    loader.dismiss()
 
     this.postedComment = this.pstProvider.getAllComments(this.postObject.key);
     this.postedComment.subscribe((data)=>{

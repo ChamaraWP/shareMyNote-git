@@ -2,7 +2,7 @@ import { Observable } from 'rxjs/Observable';
 import { PostsProvider } from './../../providers/posts/posts';
 import { Disc } from './../../models/disc';
 import { Component } from '@angular/core';
-import { NavController, NavParams,AlertController } from 'ionic-angular';
+import { NavController, NavParams, AlertController, LoadingController } from 'ionic-angular';
 
 @Component({
   selector: 'page-list',
@@ -12,14 +12,19 @@ export class ListPage {
   public discussion:any;
   postedComment:Observable<any[]>
   err:any;
-  constructor(public navCtrl: NavController, public navParams: NavParams,public alertController:AlertController,private pstProvider:PostsProvider) {
+  constructor(public navCtrl: NavController, public navParams: NavParams,public alertController:AlertController,private pstProvider:PostsProvider,public loader:LoadingController) {
     // If we navigated to this page, we will have an item available as a nav param
 
   }
 
   ionViewCanEnter(){
+    let loader = this.loader.create({
+      content:'Getting Ready'
+    })
+    loader.present();
     this.discussion = this.navParams.get('post')
     console.log(this.discussion);
+    loader.dismiss();
   }
 
   ionViewDidLoad(){

@@ -34,12 +34,14 @@ export class MyApp {
 
       ];
 
-      this.afAuth.authState
-      .subscribe((data )=> {
-        this.loginEmail = data.email;
-           console.log(this.loginEmail);
-    });
+  }
 
+  ionViewCanEnter(){
+    this.afAuth.authState
+    .subscribe((data )=> {
+      this.loginEmail = data.email;
+         console.log(this.loginEmail);
+    });
   }
 
   initializeApp() {

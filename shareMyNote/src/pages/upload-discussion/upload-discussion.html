@@ -17,22 +17,29 @@
 
 
 <ion-content padding id="input_section">
-    <ion-list>
-        <form [formGroup]="uploadDiscussionForm" (ngSubmit)="uploadDiscussion(uploadDiscussionForm.value)">
-            <ion-item>
-                <ion-label floating>Title</ion-label>
-                <ion-input type="text" formControlName="title" maxlength="150"></ion-input>
-            </ion-item>
-            <p class="error" *ngIf="!uploadDiscussionForm.controls['title'].valid && uploadDiscussionForm.controls['title'].touched && !uploadDiscussionForm.controls['title'].minLength">At Least 5 Character Title is Required</p>
-            <ion-item>
-                <ion-label floating>Enter a Description</ion-label>
-                <ion-textarea rows="5" formControlName="description" maxlength="1000"></ion-textarea>
-            </ion-item>
-            <p class="error" *ngIf="!uploadDiscussionForm.controls['description'].valid && uploadDiscussionForm.controls['description'].touched && !uploadDiscussionForm.controls['description'].minLength"> At Least 25 Character Description is Required</p>
+    <ion-card>
+        <ion-card-content>
+            <ion-list>
+                <form [formGroup]="uploadDiscussionForm" (ngSubmit)="uploadDiscussion(uploadDiscussionForm.value)">
+                    <ion-item>
+                        <ion-label floating>Title</ion-label>
+                        <ion-input type="text" formControlName="title" maxlength="150"></ion-input>
+                    </ion-item>
+                    <hr>
+                    <p class="error" *ngIf="!uploadDiscussionForm.controls['title'].valid && uploadDiscussionForm.controls['title'].touched && !uploadDiscussionForm.controls['title'].minLength">At Least 5 Character Title is Required</p>
+                    <ion-item>
+                        <ion-label floating>Enter a Description</ion-label>
+                        <ion-textarea rows="5" formControlName="description" maxlength="1000"></ion-textarea>
+                    </ion-item>
+                    <hr>
+                    <p class="error" *ngIf="!uploadDiscussionForm.controls['description'].valid && uploadDiscussionForm.controls['description'].touched && !uploadDiscussionForm.controls['description'].minLength"> At Least 25 Character Description is Required</p>
 
-            <br>
-            <button class="btn_space" ion-button full color="niceblue">Post Your Question</button>
-        </form>
-    </ion-list>
+                    <br>
+                    <button class="btn_space" ion-button full color="niceblue">Post Your Question</button>
+                </form>
+            </ion-list>
+
+        </ion-card-content>
+    </ion-card>
 
 </ion-content>

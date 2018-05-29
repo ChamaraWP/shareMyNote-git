@@ -1,7 +1,7 @@
 import { PostsProvider } from './../../providers/posts/posts';
 import { post } from './../../models/post';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams,ToastController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams,ToastController,ModalController } from 'ionic-angular';
 import { FormGroup,FormBuilder,Validators,AbstractControl } from '@angular/forms';
 import { ImagePicker } from '@ionic-native/image-picker';
 import 'rxjs/add/operator/map';
@@ -30,6 +30,8 @@ export class UploadPage {
   description:AbstractControl;
   public images = [];
   imageCount:any;
+  public loaderModal;
+
 
 
   constructor(public navCtrl: NavController,
@@ -38,7 +40,8 @@ export class UploadPage {
     public frmBuilder:FormBuilder,
     public toastController:ToastController,
     private imgPicker:ImagePicker,
-    private file:File
+    private file:File,
+    public loader:ModalController
     ) {
     this.uploadForm = frmBuilder.group({
       subject:['',[Validators.required,Validators.minLength(2),Validators.maxLength(15)]],
@@ -50,6 +53,9 @@ export class UploadPage {
   }
 
   ionViewDidLoad() {
+    this.loaderModal = this.loader.create({
+      content:'Getting Ready'
+    })
     console.log('ionViewDidLoad UploadPage');
   }
 
@@ -97,9 +103,11 @@ export class UploadPage {
             console.log('Inside This Function ReadAsArray');
             //this.upload(buffer,newUrl.name);
             let blob = new Blob([buffer],{type:"image/jpeg"});
+            this.loaderModal.present();
             firebase.storage().ref('images/'+newUrl.name).put(blob).then((results)=>{
-            console.log(results.downloadURL);
+             console.log(results.downloadURL);
             this.userPost.photos[i] = results.downloadURL;
+            this.loaderModal.dismiss();
             })
           })
         })
