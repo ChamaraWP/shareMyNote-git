@@ -4,7 +4,7 @@ import { post } from './../../models/post';
 import { PostsProvider } from './../../providers/posts/posts';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController,AlertController} from 'ionic-angular';
-import { AngularFireObject, AngularFireDatabase } from 'angularfire2/database';
+import { AngularFireObject } from 'angularfire2/database';
 
 
 
@@ -26,8 +26,7 @@ export class PostPage {
  comments:string = null
  postObservable:AngularFireObject<any>
  userPost = {} as post;
- postID;
- postID2;
+ postObject:any;
  postData={} as post;
  username;
  err:any;
@@ -38,32 +37,36 @@ export class PostPage {
      public modelController:ModalController,
      public alertController:AlertController,
      private pstProvider:PostsProvider,
-     private firebase:AngularFireDatabase,
+     /*private firebase:AngularFireDatabase,*/
      public modalCtrl: ModalController
 
      ) {
     this.userPost.comments = [];
   }
 
+  ionViewCanEnter(){
+    this.postObject = this.navParams.get('postObj')
+    console.log(this.postObject);
+  }
+
   ionViewWillEnter(){
     console.log('ionViewWillEnter PostPage');
-    this.postID = this.navParams.get('param');
-    console.log(this.postID);
 
-    this.postObservable = this.firebase.object(`allPosts/${this.postID}`);
+
+    /*this.postObservable = this.firebase.object(`allPosts/${this.postID}`);
     this.postObservable.snapshotChanges().subscribe((data) => {
     this.postData = data.payload.val();
     console.log(this.postData);
-  })
+  })*/
 }
 
 
   ionViewDidLoad() {
-    this.postID2 = this.navParams.get('param');
-   this.username = this.navParams.get('name');
-    console.log('ionViewDidLoad PostPage'+this.postID2);
 
-    this.postedComment = this.pstProvider.getAllComments(this.postID2);
+    this.username = this.navParams.get('name');
+    console.log('ionViewDidLoad PostPage '+ this.username);
+
+    this.postedComment = this.pstProvider.getAllComments(this.postObject.key);
     this.postedComment.subscribe((data)=>{
       console.log("LogDataPost "+ data);
     })
@@ -71,8 +74,6 @@ export class PostPage {
 
   openCommentModal(){
     this.err = ""
-    console.log(this.postData);
-
     this.alertController.create({
       title:"Add your comment",
       cssClass:'alertcss',
@@ -93,7 +94,7 @@ export class PostPage {
             console.log("Cant Post Empty Comments");
             this.err = 'Cant Post Empty Comments';
           }else{
-            this.pstProvider.setComments(data,this.postID);
+            this.pstProvider.setComments(data,this.postObject.key);
           }
         }
      }]

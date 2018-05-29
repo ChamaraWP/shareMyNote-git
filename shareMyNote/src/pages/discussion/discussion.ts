@@ -29,7 +29,6 @@ export class DiscussionPage {
     loader.present()
      this.Discussions =  this.pstProvider.getAllDescussion();
     console.log(this.Discussions);
-
     loader.dismiss();
   }
 

@@ -9,18 +9,21 @@
 
 <ion-content padding>
     <h4>Latest Update</h4>
+    <hr>
+    <ion-searchbar [(ngModel)]="searchQuery" [showCancelButton]="shouldShowCancel" (ionInput)="setFilteredItems($event)" (ionCancel)="onCancel($event)">
+    </ion-searchbar>
     <ion-list>
 
-        <ion-item *ngFor="let post of (allPost | async)">
+        <ion-item *ngFor="let post of seekers">
             <ion-avatar item-start>
-                <img [src]=post.photos[0]>
+                <img [src]=post.obj.photos[0]>
             </ion-avatar>
-            <h2><b>{{post.subject}}</b></h2>
-            <h3>Lesson Number : {{post.lessonNumber}}</h3>
-            <p>{{post.description}}</p>
+            <h2><b>{{post.obj.subject}}</b></h2>
+            <h3>Lesson Number : {{post.obj.lessonNumber}}</h3>
+            <p>{{post.obj.description}}</p>
 
             <!--<button ion-button small item-right color="niceblue" (click)="directToPost()"></button>-->
-            <ion-icon item-right color="niceblue" name="arrow-forward" type="button" (click)="directToPost(post.key)"></ion-icon>
+            <ion-icon item-right color="niceblue" name="arrow-forward" type="button" (click)="directToPost(post)"></ion-icon>
 
         </ion-item>
 

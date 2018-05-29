@@ -12,6 +12,7 @@
         <h3>{{discussion.qstion}}</h3>
         <h5>Posted by : {{discussion.username}}</h5>
         <p>{{discussion.description}}</p>
+        <hr>
         <ion-item *ngFor="let comment of (postedComment | async); let i = index">
             <ion-avatar item-start>
                 <img src="assets/imgs/user.svg">

@@ -15,26 +15,40 @@
 
 
 <ion-content padding>
+
     <p class="error" *ngIf="err">{{err}}</p>
-    <h3>{{postData.subject}}</h3>
-    <h4>Lesson Number:{{postData.lessonNumber}}</h4>
-    <p>{{postData.description}}</p>
-    <ion-row *ngIf="postData.photos">
-        <ion-item class="imageblock" *ngFor="let photo of postData.photos  ">
+    <ion-card-header>
+
+        <h4 style="float:left !important;">{{postObject.obj.subject}} | Lesson : {{postObject.obj.lessonNumber}}</h4>
+
+
+        <ion-item text-wrap>
+            <p style="color:black; font-size: 16px;">{{postObject.obj.description}}</p>
+        </ion-item>
+    </ion-card-header>
+
+    <ion-item class="imageblock" *ngFor="let photo of postObject.obj.photos">
+        <ion-card>
             <img [src]=photo (click)="openPhotoModal(photo)">
-        </ion-item>
-    </ion-row>
-    <hr>
-    <h6>Comments</h6>
-    <ion-list>
-        <ion-item *ngFor="let comment2 of (postedComment| async); let i= index">
-            <ion-avatar item-start>
-                <img src="assets/imgs/user.svg">
-            </ion-avatar>
-            <h2>{{comment2.name}}</h2>
-            <p>{{comment2.comment}}</p>
-        </ion-item>
-    </ion-list>
+        </ion-card>
+    </ion-item>
+
+
+    <ion-card-header>
+        <h5>Comments</h5>
+        <hr>
+    </ion-card-header>
+    <ion-card>
+        <ion-list>
+            <ion-item *ngFor="let comment2 of (postedComment| async); let i= index" text-wrap>
+                <ion-avatar item-start>
+                    <img src="assets/imgs/user.svg">
+                </ion-avatar>
+                <h2>{{comment2.name}}</h2>
+                <p>{{comment2.comment}}</p>
+            </ion-item>
+        </ion-list>
+    </ion-card>
 
     <ion-fab right bottom>
         <button ion-fab color="niceorange" (click)="openCommentModal()">
