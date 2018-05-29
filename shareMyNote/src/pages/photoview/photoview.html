@@ -6,13 +6,19 @@
 -->
 <ion-header>
 
-  <ion-navbar>
-    <ion-title>photoview</ion-title>
-  </ion-navbar>
+    <ion-navbar color="base">
+        <ion-title>Photo viewer</ion-title>
+    </ion-navbar>
 
 </ion-header>
 
 
 <ion-content padding>
+    <img [src]=photo>
 
+    <ion-fab right bottom>
+        <button ion-fab color="nicered" (click)="closeModal()">
+            <ion-icon name="md-close"></ion-icon>
+        </button>
+    </ion-fab>
 </ion-content>

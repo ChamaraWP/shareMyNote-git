@@ -14,12 +14,18 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'photoview.html',
 })
 export class PhotoviewPage {
-
+  photo:any;
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad PhotoviewPage');
+    this.photo = this.navParams.get('image')
   }
+
+  closeModal(){
+    this.navCtrl.pop()
+  }
+
 
 }

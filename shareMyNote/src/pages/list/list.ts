@@ -9,7 +9,7 @@ import { NavController, NavParams,AlertController } from 'ionic-angular';
   templateUrl: 'list.html'
 })
 export class ListPage {
-  public discussion = {} as Disc;
+  public discussion:any;
   postedComment:Observable<any[]>
   err:any;
   constructor(public navCtrl: NavController, public navParams: NavParams,public alertController:AlertController,private pstProvider:PostsProvider) {
@@ -49,12 +49,12 @@ export class ListPage {
         text:'Post',
         role:'submit',
         handler: (data ) => {
-           data.name=this.discussion.username;
+           data.name=this.discussion.obj.username;
            if( this.checkProperties(data)){
             console.log("Cant Post Empty Comments");
             this.err = 'Cant Post Empty Comments';
           }else{
-
+            console.log(this.discussion.key);
             this.pstProvider.setDiscussionComments(data,this.discussion.key);
           }
         }

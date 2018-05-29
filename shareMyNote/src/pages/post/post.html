@@ -29,7 +29,7 @@
 
     <ion-item class="imageblock" *ngFor="let photo of postObject.obj.photos">
         <ion-card>
-            <img [src]=photo (click)="openPhotoModal(photo)">
+            <img [src]=photo imageViewer>
         </ion-card>
     </ion-item>
 

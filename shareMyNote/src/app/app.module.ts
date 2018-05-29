@@ -24,6 +24,7 @@ import { DiscussionPage } from './../pages/discussion/discussion';
 import { UploadPage } from './../pages/upload/upload';
 import { UploadDiscussionPage } from './../pages/upload-discussion/upload-discussion';
 import { FavPage } from './../pages/fav/fav';
+import { PhotoviewPage } from './../pages/photoview/photoview';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
@@ -44,7 +45,8 @@ import { AuthProvider } from './../providers/auth/auth';
     DiscussionPage,
     UploadPage,
     UploadDiscussionPage,
-    FavPage
+    FavPage,
+    PhotoviewPage
 
 
 
@@ -74,7 +76,8 @@ import { AuthProvider } from './../providers/auth/auth';
     DiscussionPage,
     UploadPage,
     UploadDiscussionPage,
-    FavPage
+    FavPage,
+    PhotoviewPage
 
 
 

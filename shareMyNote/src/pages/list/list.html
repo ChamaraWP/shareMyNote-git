@@ -9,17 +9,23 @@
 
     <p class="error" *ngIf="err">{{err}}</p>
     <ion-list>
-        <h3>{{discussion.qstion}}</h3>
-        <h5>Posted by : {{discussion.username}}</h5>
-        <p>{{discussion.description}}</p>
+        <h3>{{discussion.obj.qstion}}</h3>
+        <h5>Posted by : {{discussion.obj.username}}</h5>
+        <p>{{discussion.obj.description}}</p>
         <hr>
-        <ion-item *ngFor="let comment of (postedComment | async); let i = index">
-            <ion-avatar item-start>
-                <img src="assets/imgs/user.svg">
-            </ion-avatar>
-            <h2>{{comment.name}}</h2>
-            <p>{{comment.comment}}</p>
-        </ion-item>
+
+        <ion-card>
+            <ion-card-header>
+                <h5><b>Comments</b></h5>
+            </ion-card-header>
+            <ion-item *ngFor="let comment of (postedComment | async); let i = index">
+                <ion-avatar item-start>
+                    <img src="assets/imgs/user.svg">
+                </ion-avatar>
+                <h2>{{comment.name}}</h2>
+                <p>{{comment.comment}}</p>
+            </ion-item>
+        </ion-card>
     </ion-list>
     <ion-fab right bottom>
         <button ion-fab color="niceorange" (click)="openCommentModal()">

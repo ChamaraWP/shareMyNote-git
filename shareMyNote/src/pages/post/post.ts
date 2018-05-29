@@ -1,10 +1,10 @@
-import { FavPage } from './../fav/fav';
 import { Observable } from 'rxjs/Observable';
 import { post } from './../../models/post';
 import { PostsProvider } from './../../providers/posts/posts';
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams, ModalController,AlertController} from 'ionic-angular';
 import { AngularFireObject } from 'angularfire2/database';
+import { PhotoviewPage } from '../photoview/photoview';
 
 
 
@@ -104,7 +104,7 @@ export class PostPage {
 
   openPhotoModal(photo){
     console.log(photo);
-    let photoViewer = this.modalCtrl.create(FavPage,{image:photo});
+    let photoViewer = this.modalCtrl.create(PhotoviewPage,{image:photo});
     photoViewer.present();
 
   }

@@ -1,4 +1,4 @@
-import { AngularFireDatabase,AngularFireObject } from 'angularfire2/database';
+import { AngularFireObject } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { Component } from '@angular/core';
 import { NavController, ViewController,LoadingController } from 'ionic-angular';
@@ -14,14 +14,12 @@ import firebase from 'firebase';
 
 
 
-
 @Component({
   selector: 'page-home',
   templateUrl: 'home.html'
 })
 export class HomePage {
-  //public allPost = []
-  allPost:Observable<any[]>;
+
   userObservable:AngularFireObject<any>;
   public userData:any
   searchQuery: string = '';
@@ -50,7 +48,7 @@ export class HomePage {
   }
 
   ionViewDidLoad(){
-    this.initializeItems();
+
     this.userObservable = this.pstProvider.getUserName();
     this.userObservable.snapshotChanges().subscribe((data) => {
       this.userData = data.payload.val();
@@ -60,16 +58,13 @@ export class HomePage {
   let loader = this.loadinController.create({ //create loader present that in component
       content:"Getting Ready"
     });
-   // loader.present()
-       /* this.allPost = this.pstProvider.getAllPosts();
-        console.log(this.allPost);
-    loader.dismiss();*/
+    loader.present()
+        this.initializeItems();
+        loader.dismiss();
 
     }
 
   directToPost(postObject:any){
-    console.log(postObject.key);
-
     this.navCtrl.push(PostPage,{postObj:postObject,name:this.userData.username});
   }
 

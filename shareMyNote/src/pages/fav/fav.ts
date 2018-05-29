@@ -14,17 +14,15 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
   templateUrl: 'fav.html',
 })
 export class FavPage {
-  photo:any;
+
   constructor(public navCtrl: NavController, public navParams: NavParams) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad FavPage');
-    this.photo = this.navParams.get('image')
+
   }
 
-  closeModal(){
-    this.navCtrl.pop()
-  }
+
 
 }

@@ -4,7 +4,7 @@ import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-an
 import { PostsProvider } from './../../providers/posts/posts';
 import { UploadDiscussionPage } from '../upload-discussion/upload-discussion';
 import { Observable } from 'rxjs/Observable';
-
+import firebase from 'firebase';
 /**
  * Generated class for the DiscussionPage page.
  *
@@ -18,17 +18,25 @@ import { Observable } from 'rxjs/Observable';
   templateUrl: 'discussion.html',
 })
 export class DiscussionPage {
-  Discussions:Observable<any[]>
+
+  searchQuery: string = '';
+  shouldShowCancel: boolean = true;
+  public loadedSeekers: Array<any>;
+  public seekers: Array<any> = [];
+  public seekerRef: firebase.database.Reference = firebase.database().ref('/allDiscussion');
+
+
   constructor(public navCtrl: NavController, public navParams: NavParams, private pstProvider:PostsProvider, public loader:LoadingController ) {
   }
 
   ionViewDidLoad() {
+
+
    let loader = this.loader.create({
       content:'Getting Ready'
     })
     loader.present()
-     this.Discussions =  this.pstProvider.getAllDescussion();
-    console.log(this.Discussions);
+    this.initializeItems()
     loader.dismiss();
   }
 
@@ -38,9 +46,32 @@ export class DiscussionPage {
   }
 
    directDicussionPage(discussion){
+    this.navCtrl.push(ListPage,{post:discussion})
+  }
 
-     this.navCtrl.push(ListPage,{post:discussion})
+
+  initializeItems() {
+    this.seekerRef.on('value', itemSnapshot => {
+      this.seekers = [];
+      itemSnapshot.forEach(itemSnap => {
+          this.seekers.push({
+          key:itemSnap.key,
+          obj:itemSnap.val()});
+        return false;
+      })
+    })
+  }
+
+  setFilteredItems() {
+    this.initializeItems();
+    this.seekers = this.seekers.filter((seeker) => {
+      return seeker.obj.qstion.toLowerCase().indexOf(this.searchQuery.toString().toLocaleLowerCase()) > -1;
+    })
+  }
+
+  onCancel() {
 
   }
+
 
 }

@@ -17,10 +17,15 @@
 
 
 <ion-content padding>
+    <h4>Latest Discussion</h4>
+    <hr>
+    <ion-searchbar [(ngModel)]="searchQuery" [showCancelButton]="shouldShowCancel" (ionInput)="setFilteredItems($event)" (ionCancel)="onCancel($event)">
+    </ion-searchbar>
+
     <ion-list>
-        <ion-item *ngFor="let discussion of (Discussions | async)">
-            <h2>{{discussion.qstion}}</h2>
-            <p>{{discussion.description}}</p>
+        <ion-item *ngFor="let discussion of seekers">
+            <h2>{{discussion.obj.qstion}}</h2>
+            <p>{{discussion.obj.description}}</p>
             <button ion-button small item-right color="niceblue" (click)="directDicussionPage(discussion)">More</button>
         </ion-item>
     </ion-list>
