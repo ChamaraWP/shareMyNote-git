@@ -1,43 +1,37 @@
 <!--
-  Generated template for the PostPage page.
+  Generated template for the FavNotesPage page.
 
   See http://ionicframework.com/docs/components/#navigation for more info on
   Ionic pages and navigation.
 -->
 <ion-header>
-    <ion-navbar color="base">
 
-        <ion-title>Post</ion-title>
+    <ion-navbar color="base">
+        <ion-title>Favorit Note</ion-title>
     </ion-navbar>
 
 </ion-header>
 
 
-
 <ion-content padding>
-
     <p class="error" *ngIf="err">{{err}}</p>
     <ion-card-header>
-
-        <h4 style="float:left !important;">{{postObject.obj.subject}} | Lesson : {{postObject.obj.lessonNumber}}</h4>
-
-
+        <h4 style="float:left !important;">{{favNotes.subject}} | Lesson : {{favNotes.lessonNumber}}</h4>
         <ion-item text-wrap>
-            <p style="color:black; font-size: 16px;">{{postObject.obj.description}}</p>
+            <p style="color:black; font-size: 16px;">{{favNotes.description}}</p>
         </ion-item>
     </ion-card-header>
 
     <ion-item class="imageblock">
+        <!-- <ion-card>
+            <img [src]=photo imageViewer>
+        </ion-card>-->
         <ion-slides class="image-slider" loop="true" slidesPerView="2">
-            <ion-slide *ngFor="let photo of postObject.obj.photos">
+            <ion-slide *ngFor="let photo of favNotes.photos">
                 <img [src]=photo class="thumb-img" imageViewer>
             </ion-slide>
         </ion-slides>
-        <!--<ion-card>
-            <img [src]=photo imageViewer>
-        </ion-card> -->
     </ion-item>
-
 
     <ion-card-header>
         <h5>Comments</h5>
@@ -45,19 +39,16 @@
     </ion-card-header>
     <ion-card>
         <ion-list>
-            <ion-item *ngFor="let comment2 of (postedComment| async); let i= index" text-wrap>
+            <ion-item *ngFor="let comment of favNotes.comments" text-wrap>
                 <ion-avatar item-start>
                     <img src="assets/imgs/user.svg">
                 </ion-avatar>
-                <h2>{{comment2.name}}</h2>
-                <p>{{comment2.comment}}</p>
+                <h2>{{comment.name}}</h2>
+                <p>{{comment.comment}}</p>
             </ion-item>
         </ion-list>
     </ion-card>
 
-    <ion-fab right bottom>
-        <button ion-fab color="niceorange" (click)="openCommentModal()">
-            <ion-icon name="add-circle"></ion-icon>
-        </button>
-    </ion-fab>
+
+
 </ion-content>

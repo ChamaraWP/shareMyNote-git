@@ -7,18 +7,32 @@
 <ion-header>
 
     <ion-navbar color="base">
-        <ion-title>Photo Viewer</ion-title>
+        <button ion-button menuToggle>
+            <ion-icon name="menu"></ion-icon>
+          </button>
+        <ion-title>Favorits</ion-title>
     </ion-navbar>
 
 </ion-header>
 
 
-<ion-content>
-    <img [src]=photo>
+<ion-content padding>
+    <h4>Your Favorits</h4>
+    <hr>
 
-    <ion-fab right bottom>
-        <button ion-fab color="nicered" (click)="closeModal()">
-            <ion-icon name="md-close"></ion-icon>
-        </button>
-    </ion-fab>
+    <ion-list>
+        <ion-item-sliding *ngFor="let fav of ( allFavs | async )">
+            <ion-item>
+                <h2>{{fav.subject}}</h2>
+                <h4>{{fav.type}}</h4>
+                <p>{{fav.description}}</p>
+                <button ion-button small item-right color="niceblue" (click)="gotoDetailsPage(fav)">More</button>
+            </ion-item>
+            <ion-item-options side="left">
+                <button ion-button color="niceorange"><ion-icon name="md-trash" (click)="deleteFav(fav)"></ion-icon></button>
+            </ion-item-options>
+        </ion-item-sliding>
+
+    </ion-list>
+
 </ion-content>

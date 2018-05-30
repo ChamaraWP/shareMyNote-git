@@ -44,11 +44,13 @@
                     <p class="error" *ngIf="!uploadForm.controls['description'].valid && uploadForm.controls['description'].touched && !uploadForm.controls['description'].minLength">At Least 20 Character Description is Required</p>
                     <ion-item style="text-align: center !important">
                         <button ion-button small color="niceorange" type="button" (click)="getImages()">Add Photos</button>
+
                     </ion-item>
+                    <p *ngIf="imageCount" style="text-align: center">{{imageCount}} :Images Selected</p>
                     <hr>
 
                     <br>
-                    <p *ngIf="imageCount">{{imageCount}}:Selected</p>
+
                     <button ion-button full color="niceblue" type="submit">Post</button>
                 </form>
             </ion-list>

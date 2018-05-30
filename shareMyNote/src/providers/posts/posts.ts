@@ -59,17 +59,15 @@ export class PostsProvider {
 
 }
 
- getAllDescussion(){
-  let ref = this.firebase.list('/allDiscussion/').snapshotChanges().map((changes)=>{
+ getAllFav(){
+  let ref = this.firebase.list(`/userProfile/${this.userID}/allFav`).snapshotChanges().map((changes)=>{
     return changes.map( c => ({
       key:c.payload.key,...c.payload.val()}))
     });
   return ref;
  }
 
- getDiscussion(){
 
- }
 
  setDiscussion(values:any){
    console.log(values);
@@ -96,6 +94,14 @@ export class PostsProvider {
       key:c.payload.key,...c.payload.val()}))
     });
   return ref;
+ }
+
+ addToFav(favObj){
+  this.firebase.list(`/userProfile/${this.userID}/allFav`).push(favObj.obj);
+ }
+
+ deleteFav(favid){
+   this.firebase.list(`/userProfile/${this.userID}/allFav/`).remove(favid)
  }
 
 }

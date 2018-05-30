@@ -1,6 +1,6 @@
 import { ListPage } from './../list/list';
 import { Component } from '@angular/core';
-import { IonicPage, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { IonicPage, NavController, NavParams, LoadingController,ToastController } from 'ionic-angular';
 import { PostsProvider } from './../../providers/posts/posts';
 import { UploadDiscussionPage } from '../upload-discussion/upload-discussion';
 import { Observable } from 'rxjs/Observable';
@@ -26,7 +26,7 @@ export class DiscussionPage {
   public seekerRef: firebase.database.Reference = firebase.database().ref('/allDiscussion');
 
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, private pstProvider:PostsProvider, public loader:LoadingController ) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private pstProvider:PostsProvider, public loader:LoadingController,public toast:ToastController ) {
   }
 
   ionViewDidLoad() {
@@ -67,6 +67,17 @@ export class DiscussionPage {
     this.seekers = this.seekers.filter((seeker) => {
       return seeker.obj.qstion.toLowerCase().indexOf(this.searchQuery.toString().toLocaleLowerCase()) > -1;
     })
+  }
+
+  addToFav(discussion:any){
+    let toast = this.toast.create({
+      message:'Favorit Added',
+      duration:3000
+    })
+    toast.present();
+    discussion.obj.type="Discussion"
+    discussion.obj.subject=discussion.obj.qstion;
+    this.pstProvider.addToFav(discussion);
   }
 
   onCancel() {

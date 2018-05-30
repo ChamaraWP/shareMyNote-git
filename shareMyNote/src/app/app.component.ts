@@ -7,6 +7,7 @@ import { HomePage } from '../pages/home/home';
 import { LoginPage } from '../pages/login/login';
 import { DiscussionPage } from './../pages/discussion/discussion';
 import { MenuController } from 'ionic-angular';
+import { FavPage } from '../pages/fav/fav';
 
 
 
@@ -30,7 +31,8 @@ export class MyApp {
     // used for an example of ngFor and navigation
     this.pages = [
       { title: 'Notes', component: HomePage },
-      { title :'Discussions',component:DiscussionPage}
+      { title :'Discussions',component:DiscussionPage},
+      {title:'Favorits',component:FavPage}
 
       ];
 

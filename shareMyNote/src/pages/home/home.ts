@@ -1,7 +1,7 @@
 import { AngularFireObject } from 'angularfire2/database';
 import { Observable } from 'rxjs/Observable';
 import { Component } from '@angular/core';
-import { NavController, ViewController,LoadingController } from 'ionic-angular';
+import { NavController, ViewController,LoadingController,ToastController } from 'ionic-angular';
 import { PostsProvider } from './../../providers/posts/posts';
 import { PostPage } from './../post/post';
 import { UploadPage } from './../upload/upload';
@@ -35,6 +35,7 @@ export class HomePage {
     private viewController:ViewController,
     private loadinController:LoadingController,
     private pstProvider:PostsProvider,
+    public toast:ToastController,
 
 
      ) {
@@ -89,6 +90,16 @@ export class HomePage {
         return false;
       })
     })
+  }
+
+  addToFav(post){
+    let toast = this.toast.create({
+      message:'Favorit Added',
+      duration:3000
+    })
+    toast.present();
+    post.obj.type="Notes";
+    this.pstProvider.addToFav(post);
   }
 
   onCancel() {

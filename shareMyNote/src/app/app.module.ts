@@ -12,7 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { ImagePicker } from '@ionic-native/image-picker';
 import { File } from '@ionic-native/file';
-
+import { IonicImageViewerModule } from 'ionic-img-viewer';
 
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
@@ -25,11 +25,14 @@ import { UploadPage } from './../pages/upload/upload';
 import { UploadDiscussionPage } from './../pages/upload-discussion/upload-discussion';
 import { FavPage } from './../pages/fav/fav';
 import { PhotoviewPage } from './../pages/photoview/photoview';
+import { FavNotesPage } from '../pages/fav-notes/fav-notes';
+import { FavDiscPage } from './../pages/fav-disc/fav-disc';
 
 import { StatusBar } from '@ionic-native/status-bar';
 import { SplashScreen } from '@ionic-native/splash-screen';
 import { PostsProvider } from '../providers/posts/posts';
 import { AuthProvider } from './../providers/auth/auth';
+
 
 
 
@@ -46,7 +49,9 @@ import { AuthProvider } from './../providers/auth/auth';
     UploadPage,
     UploadDiscussionPage,
     FavPage,
-    PhotoviewPage
+    PhotoviewPage,
+    FavNotesPage,
+    FavDiscPage
 
 
 
@@ -62,7 +67,8 @@ import { AuthProvider } from './../providers/auth/auth';
     AngularFireModule.initializeApp(FIREBASE_CONFIG),
     AngularFireAuthModule,
     AngularFireDatabaseModule,
-    CommonModule
+    CommonModule,
+    IonicImageViewerModule
 
   ],
   bootstrap: [IonicApp],
@@ -77,7 +83,9 @@ import { AuthProvider } from './../providers/auth/auth';
     UploadPage,
     UploadDiscussionPage,
     FavPage,
-    PhotoviewPage
+    PhotoviewPage,
+    FavNotesPage,
+    FavDiscPage
 
 
 
